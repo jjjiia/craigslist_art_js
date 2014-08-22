@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../libs/d3.v3.min.js"></script>
+    <style>
+	body{font-family:helvetica; font-size:10px; color:#666;}
+	#title{font-size:24px;margin:20px;letter-spacing:1px;}
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #666;}
+
+        .dataArea {
+            stroke: 1px #666;
+            fill:#666;
+            fill-opacity:0.5;
+            clip-path: url(#clip);
+        }
+		.notAverage{stroke:#666; fill:#ddd;}
+		.Census{stroke:#666; fill:#ddd;}
+		.PopRef{stroke:#666; fill:#ddd;}
+		.Hyde{stroke:#666; fill:#ddd;}
+		.Maddison{stroke:#666; fill:#ddd;}
+		.line {fill: none;}
+		.Inter{fill:#fff; opacity:0.1;}
+		.Average{stroke:red;opacity:.6;stroke-width:3;}
+		#label{position:absolute; top:30px;left:250px;font-size:12px;color:red;}
+    </style>
+
+</head>
+<body>
+	<div id="title">World Population</div>
+    <div id="vis"></div>
+	<div id="label">Roll over nodes to see detail.</div>
+	<script src="differenceGraph.js"></script>
+
+
+</body>
+</html>

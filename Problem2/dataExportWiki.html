@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="../libs/jquery-1.10.1.js"></script>
+    <script src="../libs/jquery.xdomainajax.js"></script>
+    <script src="../libs/d3.v3.min.js"></script>
+    <script src="../libs/FileSaver.js"></script>
+</head>
+<body>
+
+<script>
+    var convertToInt;
+
+    $.ajax({
+        url: "http://boston.craigslist.org/",
+        type: 'GET',
+        cache: false,
+        success: function(data) {
+            var root,allData, body, table;
+            root = $("<div></div>")
+            root.html(data.responseText)
+			var table = [];
+            var content = root.find("#content"); // find all the nodes that have ID "content"
+			var tablehead = []
+			content.find(".wikitable th:lt(6)").each(function(){
+				var str = $.trim($(this).text())
+				str= str.replace(/\s{2,}/g, ' ');
+				tablehead.push(str)
+			}); // headers for year, and the 5 agencies only
+			//console.log(tablehead)
+			table.push(tablehead.join(","));
+			
+            var tablecontent = content.find(".wikitable tr:gt(10)");// content for rows => year 0
+			
+			$.each(tablecontent, function(index, value){
+				var row = []
+				$(value).find("td:lt(6)").each(function(){
+					var str = $.trim($(this).text())
+					str= str.replace(/\s{2,}/g, ' ');
+					str= str.replace(/\,/g, '');
+					if(str!=""){
+						row.push(parseInt(str))
+					}else{
+						row.push(str)
+					}
+				}); // headers for year, and the 5 agencies only
+				//console.log(row)
+				table.push(row.join(","));
+				
+				//$.trim($(value).find("td:lt(6)"))
+				//table.push($(value).find("td:lt(6)").text());			
+			})
+			
+			//console.log(table)
+            $.each(tablecontent, function(index, value) {
+             // console.log($(value).text()); // print text
+			 // console.log(index)
+            });
+			saveToFile(table,"test.txt")
+        },
+        error: function() {
+            return console.log("error");
+        }
+    });
+
+    convertToInt = function(s) {
+        return parseInt(s.replace(/,/g, ""), 10);
+    };
+	
+    /* takes an array of strings
+       and writes them line by line into a file given by filename
+     */
+    var saveToFile = function(arrayOfLines, fileName) {
+       /* adds linebreaks at the end*/
+       var blob, blobText;
+       blobText = arrayOfLines.map(function(d) {
+         if (d.endsWith("\n")) {
+           return d;
+         } else {
+           return d + "\n";
+         }
+       });
+       blob = new Blob(blobText, {
+         type: "text/plain;charset=utf-8"
+       });
+	   //console.log(blobText)
+       return saveAs(blob, fileName);
+     };
+
+     String.prototype.endsWith = function(suffix) {
+       return this.indexOf(suffix, this.length - suffix.length) !== -1;
+     };
+	
+
+
+
+</script>
+
+
+</body>
+</html>

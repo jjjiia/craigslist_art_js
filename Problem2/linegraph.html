@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../libs/d3.v3.min.js"></script>
+    <style>
+	body{font-family:helvetica; font-size:10px; color:#666;}
+	#title{font-size:24px;margin:20px;letter-spacing:1px;}
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #666;}
+
+        .dataArea {
+            stroke: 1px #666;
+            fill:#666;
+            fill-opacity:0.5;
+            clip-path: url(#clip);
+        }
+		.SocialAffairs{stroke:#5BD85E; fill:#5BD85E;}
+		.Census{stroke:#E0932C;fill:#E0932C;}
+		.PopRef{stroke:#5374D5;fill:#5374D5;}
+		.Hyde{stroke:#E04123;fill:#E04123;}
+		.Maddison{stroke:#A7278E;fill:#A7278E;}
+		.line {fill: none;}
+		.Inter{fill:#fff; opacity:0.5;}
+		#label{position:absolute; top:50px;left:30px;font-size:14px;color:red;}
+    </style>
+
+</head>
+<body>
+	<div id="title">World Population</div>
+    <div id="vis"></div>
+	<div id="label">Roll over nodes to see detail.</div>
+	<script src="linegraph.js"></script>
+
+
+</body>
+</html>
